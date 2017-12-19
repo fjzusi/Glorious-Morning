@@ -9,8 +9,9 @@ function State_Title:keypressed(key, unicode)
 end
 
 function State_Title:gamepadpressed(joystick, button)
+	print(button);
   if button == JOY_START then
-    GameState.switch(State_Title);
+    GameState.switch(State_Game);
   end
 end
 

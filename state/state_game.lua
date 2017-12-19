@@ -86,6 +86,42 @@ function State_Game:keyreleased(key, unicode)
   end
 end
 
+function State_Game:gamepadpressed(joystick, button)
+  if button == JOY_LEFT then
+    self.player.leftPressed = true;
+  end
+
+  if button == JOY_RIGHT then
+    self.player.rightPressed = true;
+  end
+
+  if button == JOY_UP then
+    self.player.upPressed = true;
+  end
+
+  if button == JOY_DOWN then
+    self.player.downPressed = true;
+  end
+end
+
+function State_Game:gamepadreleased(joystick, button)
+  if button == JOY_LEFT then
+    self.player.leftPressed = false;
+  end
+
+  if button == JOY_RIGHT then
+    self.player.rightPressed = false;
+  end
+
+  if button == JOY_UP then
+    self.player.upPressed = false;
+  end
+
+  if button == JOY_DOWN then
+    self.player.downPressed = false;
+  end
+end
+
 function State_Game:update(dt)
 	if(not self.paused) then
     self.time = self.time + dt;
