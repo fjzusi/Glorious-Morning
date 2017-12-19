@@ -10,15 +10,15 @@ State_Game = {};
 
 function State_Game:init()
 	BumpWorld = Bump.newWorld(32);
-  
+
   self.player = Player();
   self.wallManager = WallManager();
   self.background = Background();
   self.timeline = Timeline(self.wallManager, self.background);
-  
+
   self.time = 0;
   self.sunTimer = SUN_TIMER;
-  
+
   self.backgroundMusic = love.audio.newSource("asset/music/gloriousmorning.mp3", "stream");
 end
 
@@ -27,12 +27,12 @@ function State_Game:enter()
   self.wallManager:reset();
   self.background:reset();
   self.timeline:reset();
-  
+
   self.time = 0;
   self.sunTimer = SUN_TIMER;
-  
+
 	love.audio.rewind(self.backgroundMusic);
-  
+
   if(PLAY_MUSIC) then
     love.audio.play(self.backgroundMusic);
   end
@@ -54,15 +54,15 @@ function State_Game:keypressed(key, unicode)
 	if(key == "left") then
     self.player.leftPressed = true;
   end
-  
+
   if(key == "right") then
     self.player.rightPressed = true;
   end
-  
+
   if(key == "up") then
     self.player.upPressed = true;
   end
-  
+
   if(key == "down") then
     self.player.downPressed = true;
   end
@@ -72,15 +72,15 @@ function State_Game:keyreleased(key, unicode)
 	if(key == "left") then
     self.player.leftPressed = false;
   end
-  
+
   if(key == "right") then
     self.player.rightPressed = false;
   end
-  
+
   if(key == "up") then
     self.player.upPressed = false;
   end
-  
+
   if(key == "down") then
     self.player.downPressed = false;
   end
@@ -90,12 +90,12 @@ function State_Game:update(dt)
 	if(not self.paused) then
     self.time = self.time + dt;
     self.sunTimer = self.sunTimer - dt * SUN_RATE;
-    
+
     self.timeline:update(dt);
 		self.player:update(dt, self.sunTimer);
     self.wallManager:update(dt);
     self.background:update(dt, self.sunTimer);
-    
+
     if(self.sunTimer < 0) then
       GameState.switch(State_Win);
     end
@@ -103,11 +103,16 @@ function State_Game:update(dt)
 end
 
 function State_Game:draw()
-	self.background:drawBelow();
-  self.player:drawBelow();
-  self.background:drawAbove();
-  self.player:drawAbove();
-  self.wallManager:draw();
-  
-  self.timeline:draw();
+	CANVAS:renderTo(function()
+		self.background:drawBelow();
+	  self.player:drawBelow();
+	  self.background:drawAbove();
+	  self.player:drawAbove();
+	  self.wallManager:draw();
+
+	  self.timeline:draw();
+  end);
+
+  love.graphics.setColor(255, 255, 255);
+  love.graphics.draw(CANVAS, CANVAS_OFFSET_X, CANVAS_OFFSET_Y, 0, CANVAS_SCALE, CANVAS_SCALE);
 end
