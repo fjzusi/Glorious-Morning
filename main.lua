@@ -1,7 +1,10 @@
-GameState = require "lib/hump/gamestate";
 Class = require "lib/hump/class";
+GameState = require "lib/hump/gamestate";
+Timer = require "lib/hump/timer";
 Bump = require "lib/bump";
 
+require "state/state_splash_hive";
+require "state/state_splash_love";
 require "state/state_title";
 require "state/state_game";
 require "state/state_game_over";
@@ -47,7 +50,7 @@ function love.load()
   CANVAS_OFFSET_Y = h / 2 - (SCREEN_HEIGHT * CANVAS_SCALE) / 2;
 
 	GameState.registerEvents();
-	GameState.switch(State_Title);
+	GameState.switch(State_Splash_Hive);
 end
 
 function love.mousepressed(x, y, button)
