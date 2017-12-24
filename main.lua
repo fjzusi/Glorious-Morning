@@ -29,6 +29,7 @@ HIT_ENABLED = true;
 
 function love.load()
 	love.window.setFullscreen(FULLSCREEN);
+	love.mouse.setVisible(false);
 
   CANVAS = love.graphics.newCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
   CANVAS:setFilter("nearest");
