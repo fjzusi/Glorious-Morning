@@ -12,7 +12,7 @@ require "state/state_win";
 
 BumpWorld = {};
 
-FULLSCREEN = true;
+FULLSCREEN = false;
 SCREEN_WIDTH = 400;
 SCREEN_HEIGHT = 600;
 
