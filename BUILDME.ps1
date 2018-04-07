@@ -1,4 +1,4 @@
-$Project = 'Bump-in-the-Night'
+$Project = 'Glorious-Morning'
 $Version = Read-Host -Prompt 'Version Number?'
 $path = cd
 $exclude = @("notes", "wip", "BUILDME.ps1", "README.md", "RUNME.bat")
